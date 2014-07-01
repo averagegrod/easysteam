@@ -73,6 +73,7 @@ function setGameData(data){
 	console.log(player.games.length);
 	player.unplayed = [];
 	player.played = [];
+
 	player.games.forEach(function(game){
 		player.totalPlayTime += game.playtime_forever;
 		player.played.push(game);
@@ -85,15 +86,47 @@ function setGameData(data){
 
 	player.played.forEach(function(game){
 		$('#pizza').append("<li data-value=\"" + game.playtime_forever / player.totalPlayTime * 10 + "\">" + game.name + "</li>");
+		
 	});
 	$('#result').before("Total Unplayed games:" + player.unplayed.length + " games!</ br>");
 	$('#result').before("Total Played games:" + player.played.length + " games!</ br>");
 	$('#result').before("Total Play time:" + player.totalPlayTime + "mins");
+	//paginate(player.played.length);
 	Pizza.init();
+	$("#holder").jPages({
+		containerID: "pizza",
+		perPage: 20
+	});
 }
 
+function paginate(games){
+	pages = Math.floor(games/20);
+	console.log(pages);
+	for(i=0; i<pages; i++){
+		$('.pagination').append("<li><a href=\"\">" + i+1 + "</a></li>");
+
+	}
+	/*$('.pagination').prepend("<li class=\"arrow unavailable\"><a href=\"\">&laquo;</a></li>");
+	$('.pagination').append("<li class=\"arrow\"><a href=\"\">&raquo;</a></li>");*/
+}
+
+						
 
 $("#owl-demo").owlCarousel({
+	navigation : true, // Show next and prev buttons
+	slideSpeed : 300,
+	paginationSpeed : 400,
+	singleItem:true
+
+	// "singleItem:true" is a shortcut for:
+	// items : 1, 
+	// itemsDesktop : false,
+	// itemsDesktopSmall : false,
+	// itemsTablet: false,
+	// itemsMobile : false
+});
+
+$("#owl2").owlCarousel({
 	navigation : true, // Show next and prev buttons
 	slideSpeed : 300,
 	paginationSpeed : 400,
