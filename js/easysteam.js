@@ -81,7 +81,6 @@ function setGameData(data){
 			player.unplayed.push(game);
 			player.played.pop();
 		}
-		$('#resultList').append("<li>" + game.name +  " " + game.playtime_forever + "</li>");
 	});
 
 	player.played.forEach(function(game){
@@ -110,13 +109,28 @@ function paginate(games){
 	$('.pagination').append("<li class=\"arrow\"><a href=\"\">&raquo;</a></li>");*/
 }
 
-						
+
 
 $("#owl-demo").owlCarousel({
-	navigation : true, // Show next and prev buttons
-	slideSpeed : 300,
-	paginationSpeed : 400,
-	singleItem:true
+	navigation: true,
+	slideSpeed: 300,
+	paginationSpeed: 400,
+	singleItem:true,
+	afterInit: function(elem){
+		$(".next").click(function(){
+			$("#owl-demo").trigger('owl.next');
+		});
+		$(".prev").click(function(){
+			$("#owl-demo").trigger('owl.prev');
+		});
+		$(".play").click(function(){
+			$("#owl-demo").trigger('owl.play',1000); //owl.play event accept autoPlay speed as second parameter
+		});
+		$(".stop").click(function(){
+			$("#owl-demo").trigger('owl.stop');
+		});
+
+	}
 
 	// "singleItem:true" is a shortcut for:
 	// items : 1, 
@@ -126,17 +140,6 @@ $("#owl-demo").owlCarousel({
 	// itemsMobile : false
 });
 
-$("#owl2").owlCarousel({
-	navigation : true, // Show next and prev buttons
-	slideSpeed : 300,
-	paginationSpeed : 400,
-	singleItem:true
 
-	// "singleItem:true" is a shortcut for:
-	// items : 1, 
-	// itemsDesktop : false,
-	// itemsDesktopSmall : false,
-	// itemsTablet: false,
-	// itemsMobile : false
-});
+
 

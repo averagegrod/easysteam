@@ -16,8 +16,9 @@ body{
   @include linear-gradient(#444444 20%, #000000 100%);
 }
 
-header{
-  height: 60px;
+#header{
+  padding-top: 1em;
+  border-bottom: solid 1px grey;
 }
 
 #my-cool-chart{
@@ -30,11 +31,21 @@ header{
 text{
   fill: white;
 }
+
+ol{
+  margin-left: 2rem;
+}
+
 #update{
   height: 25px;
 }
 
 #footer {
+  p{
+    padding-top: 1em;
+  }
+  background-color: black;
+  border-top: solid 1px grey;
   position: fixed;
   bottom: 0;
   width: 100%;
