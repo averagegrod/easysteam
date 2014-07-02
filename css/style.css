@@ -30,125 +30,125 @@ text {
   text-align: center; }
 
 /******** PIZZA-PIE *******/
-[data-pie-id] > *:nth-child(40n+0), [data-bar-id] > *:nth-child(10n+0), [data-line-id] > *:nth-child(10n+0) {
-  color: #f68c74; }
-
 [data-pie-id] > *:nth-child(40n+1), [data-bar-id] > *:nth-child(10n+1), [data-line-id] > *:nth-child(10n+1) {
-  color: #f57c61; }
+  color: #d9320d; }
 
 [data-pie-id] > *:nth-child(40n+2), [data-bar-id] > *:nth-child(10n+2), [data-line-id] > *:nth-child(10n+2) {
-  color: #f46c4e; }
+  color: #ec370f; }
 
 [data-pie-id] > *:nth-child(40n+3), [data-bar-id] > *:nth-child(10n+3), [data-line-id] > *:nth-child(10n+3) {
-  color: #f35c3a; }
+  color: #f1441e; }
 
 [data-pie-id] > *:nth-child(40n+4), [data-bar-id] > *:nth-child(10n+4), [data-line-id] > *:nth-child(10n+4) {
-  color: #f24c27; }
+  color: #f25431; }
 
 [data-pie-id] > *:nth-child(40n+5), [data-bar-id] > *:nth-child(10n+5), [data-line-id] > *:nth-child(10n+5) {
-  color: #f13c14; }
+  color: #f36444; }
 
 [data-pie-id] > *:nth-child(40n+6), [data-bar-id] > *:nth-child(10n+6), [data-line-id] > *:nth-child(10n+6) {
-  color: #e2350e; }
+  color: #f57457; }
 
 [data-pie-id] > *:nth-child(40n+7), [data-bar-id] > *:nth-child(10n+7), [data-line-id] > *:nth-child(10n+7) {
-  color: #cf300d; }
+  color: #f6846a; }
 
 [data-pie-id] > *:nth-child(40n+8), [data-bar-id] > *:nth-child(10n+8), [data-line-id] > *:nth-child(10n+8) {
-  color: #bc2c0c; }
+  color: #f7947e; }
 
 [data-pie-id] > *:nth-child(40n+9), [data-bar-id] > *:nth-child(10n+9), [data-line-id] > *:nth-child(10n+9) {
-  color: #a9270a; }
+  color: #f8a491; }
 
-[data-pie-id] > *:nth-child(40n+10), [data-bar-id] > *:nth-child(40n+10), [data-line-id] > *:nth-child(40n+10) {
-  color: #f19b13; }
+[data-pie-id] > *:nth-child(40n+10), [data-bar-id] > *:nth-child(10n+10), [data-line-id] > *:nth-child(10n+10) {
+  color: #f9b4a4; }
 
 [data-pie-id] > *:nth-child(40n+11), [data-bar-id] > *:nth-child(40n+11), [data-line-id] > *:nth-child(40n+11) {
-  color: #eb960e; }
+  color: #c07a0c; }
 
 [data-pie-id] > *:nth-child(40n+12), [data-bar-id] > *:nth-child(40n+12), [data-line-id] > *:nth-child(40n+12) {
-  color: #e18f0e; }
+  color: #d3860d; }
 
 [data-pie-id] > *:nth-child(40n+13), [data-bar-id] > *:nth-child(40n+13), [data-line-id] > *:nth-child(40n+13) {
-  color: #d8890d; }
+  color: #e6930e; }
 
 [data-pie-id] > *:nth-child(40n+14), [data-bar-id] > *:nth-child(40n+14), [data-line-id] > *:nth-child(40n+14) {
-  color: #ce830d; }
+  color: #f19d18; }
 
 [data-pie-id] > *:nth-child(40n+15), [data-bar-id] > *:nth-child(40n+15), [data-line-id] > *:nth-child(40n+15) {
-  color: #c47d0c; }
+  color: #f2a52b; }
 
 [data-pie-id] > *:nth-child(40n+16), [data-bar-id] > *:nth-child(40n+16), [data-line-id] > *:nth-child(40n+16) {
-  color: #bb770b; }
+  color: #f3ad3e; }
 
 [data-pie-id] > *:nth-child(40n+17), [data-bar-id] > *:nth-child(40n+17), [data-line-id] > *:nth-child(40n+17) {
-  color: #b1710b; }
+  color: #f4b551; }
 
 [data-pie-id] > *:nth-child(40n+18), [data-bar-id] > *:nth-child(40n+18), [data-line-id] > *:nth-child(40n+18) {
-  color: #a86b0a; }
+  color: #f6bd65; }
 
 [data-pie-id] > *:nth-child(40n+19), [data-bar-id] > *:nth-child(40n+19), [data-line-id] > *:nth-child(40n+19) {
-  color: #9e650a; }
+  color: #f7c678; }
 
 [data-pie-id] > *:nth-child(40n+20), [data-bar-id] > *:nth-child(40n+20), [data-line-id] > *:nth-child(40n+20) {
-  color: #0bad54; }
+  color: #f8ce8b; }
 
 [data-pie-id] > *:nth-child(40n+21), [data-bar-id] > *:nth-child(40n+21), [data-line-id] > *:nth-child(40n+21) {
-  color: #0aa44f; }
+  color: #0cc15d; }
 
 [data-pie-id] > *:nth-child(40n+22), [data-bar-id] > *:nth-child(40n+22), [data-line-id] > *:nth-child(40n+22) {
-  color: #099a4a; }
+  color: #0dd466; }
 
 [data-pie-id] > *:nth-child(40n+23), [data-bar-id] > *:nth-child(40n+23), [data-line-id] > *:nth-child(40n+23) {
-  color: #099046; }
+  color: #0ee770; }
 
 [data-pie-id] > *:nth-child(40n+24), [data-bar-id] > *:nth-child(40n+24), [data-line-id] > *:nth-child(40n+24) {
-  color: #088741; }
+  color: #19f17a; }
 
 [data-pie-id] > *:nth-child(40n+25), [data-bar-id] > *:nth-child(40n+25), [data-line-id] > *:nth-child(40n+25) {
-  color: #087d3d; }
+  color: #2cf285; }
 
 [data-pie-id] > *:nth-child(40n+26), [data-bar-id] > *:nth-child(40n+26), [data-line-id] > *:nth-child(40n+26) {
-  color: #077438; }
+  color: #3ff390; }
 
 [data-pie-id] > *:nth-child(40n+27), [data-bar-id] > *:nth-child(40n+27), [data-line-id] > *:nth-child(40n+27) {
-  color: #076a33; }
+  color: #52f49b; }
 
 [data-pie-id] > *:nth-child(40n+28), [data-bar-id] > *:nth-child(40n+28), [data-line-id] > *:nth-child(40n+28) {
-  color: #06602f; }
+  color: #66f6a6; }
 
 [data-pie-id] > *:nth-child(40n+29), [data-bar-id] > *:nth-child(40n+29), [data-line-id] > *:nth-child(40n+29) {
-  color: #05572a; }
+  color: #79f7b1; }
 
 [data-pie-id] > *:nth-child(40n+30), [data-bar-id] > *:nth-child(40n+30), [data-line-id] > *:nth-child(40n+30) {
-  color: #6fb7f6; }
+  color: #8cf8bd; }
 
 [data-pie-id] > *:nth-child(40n+31), [data-bar-id] > *:nth-child(40n+31), [data-line-id] > *:nth-child(40n+31) {
-  color: #6ab5f6; }
+  color: #0c6dc1; }
 
 [data-pie-id] > *:nth-child(40n+32), [data-bar-id] > *:nth-child(40n+32), [data-line-id] > *:nth-child(40n+32) {
-  color: #65b3f6; }
+  color: #0d77d4; }
 
 [data-pie-id] > *:nth-child(40n+33), [data-bar-id] > *:nth-child(40n+33), [data-line-id] > *:nth-child(40n+33) {
-  color: #60b0f5; }
+  color: #0e82e7; }
 
 [data-pie-id] > *:nth-child(40n+34), [data-bar-id] > *:nth-child(40n+34), [data-line-id] > *:nth-child(40n+34) {
-  color: #5caef5; }
+  color: #198cf1; }
 
 [data-pie-id] > *:nth-child(40n+35), [data-bar-id] > *:nth-child(40n+35), [data-line-id] > *:nth-child(40n+35) {
-  color: #57abf5; }
+  color: #2c96f2; }
 
 [data-pie-id] > *:nth-child(40n+36), [data-bar-id] > *:nth-child(40n+36), [data-line-id] > *:nth-child(40n+36) {
-  color: #52a9f4; }
+  color: #3fa0f3; }
 
 [data-pie-id] > *:nth-child(40n+37), [data-bar-id] > *:nth-child(40n+37), [data-line-id] > *:nth-child(40n+37) {
-  color: #4da7f4; }
+  color: #52a9f4; }
 
 [data-pie-id] > *:nth-child(40n+38), [data-bar-id] > *:nth-child(40n+38), [data-line-id] > *:nth-child(40n+38) {
-  color: #48a4f4; }
+  color: #66b3f6; }
 
 [data-pie-id] > *:nth-child(40n+39), [data-bar-id] > *:nth-child(40n+39), [data-line-id] > *:nth-child(40n+39) {
-  color: #44a2f3; }
+  color: #79bcf7; }
+
+[data-pie-id] > *:nth-child(40n+40), [data-bar-id] > *:nth-child(40n+40), [data-line-id] > *:nth-child(40n+40) {
+  color: #8cc6f8; }
 
 #holder {
   background-color: #f2a52b;

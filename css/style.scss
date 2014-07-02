@@ -1,12 +1,13 @@
 @import "bourbon/bourbon";
 
 $esOrange: #F2A52B;
-$esLightOrange: lighten(#F2A52B, 15%);
-$esRed: lighten(#F2502C, 15%);
+$esDarkOrange: darken(#F2A52B, 20%);
+$esRed: #F2502C;
+$esDarkRed: darken(#F2502C, 15%);
 $esGreen: #2CF285;
-$esLightGreen: lighten(#2CF285, 20%);
+$esDarkGreen: darken(#2CF285, 20%);
 $esBlue: #2C96F2;
-$esLightBlue: lighten(#2C96F2, 50%);
+$esDarkBlue: darken(#2C96F2, 20%);
 
 body{
   color: white;
@@ -42,24 +43,24 @@ text{
 }
 
 /******** PIZZA-PIE *******/
-@for $i from 0 through 9{
+@for $i from 1 through 10{
   [data-pie-id] > *:nth-child(40n+#{$i}), [data-bar-id] > *:nth-child(10n+#{$i}), [data-line-id] > *:nth-child(10n+#{$i}) {
-    color: darken($esRed, $i*4% ); }
+    color: lighten($esDarkRed, $i*4% ); }
   }
 
-@for $i from 10 through 19{
-  [data-pie-id] > *:nth-child(40n+#{$i}), [data-bar-id] > *:nth-child(40n+#{$i}), [data-line-id] > *:nth-child(40n+#{$i}) {
-    color: darken($esLightOrange, $i*2% ); }
+@for $i from 1 through 10{
+  [data-pie-id] > *:nth-child(40n+#{$i+10}), [data-bar-id] > *:nth-child(40n+#{$i+10}), [data-line-id] > *:nth-child(40n+#{$i+10}) {
+    color: lighten($esDarkOrange, $i*4% ); }
   }
 
-@for $i from 20 through 29{
-  [data-pie-id] > *:nth-child(40n+#{$i}), [data-bar-id] > *:nth-child(40n+#{$i}), [data-line-id] > *:nth-child(40n+#{$i}) {
-    color: darken($esLightGreen, $i*2% ); }
+@for $i from 1 through 10{
+  [data-pie-id] > *:nth-child(40n+#{$i+20}), [data-bar-id] > *:nth-child(40n+#{$i+20}), [data-line-id] > *:nth-child(40n+#{$i+20}) {
+    color: lighten($esDarkGreen, $i*4% ); }
   }
 
-@for $i from 30 through 39{
-  [data-pie-id] > *:nth-child(40n+#{$i}), [data-bar-id] > *:nth-child(40n+#{$i}), [data-line-id] > *:nth-child(40n+#{$i}) {
-    color: darken($esLightBlue, $i*1% ); }
+@for $i from 1 through 10{
+  [data-pie-id] > *:nth-child(40n+#{$i+30}), [data-bar-id] > *:nth-child(40n+#{$i+30}), [data-line-id] > *:nth-child(40n+#{$i+30}) {
+    color: lighten($esDarkBlue, $i*4% ); }
   }
 
 #holder{
