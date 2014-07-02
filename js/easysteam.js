@@ -59,8 +59,9 @@ function setPlayerData(data){
 	playerData = data.response.players[0];
 	player.personaname = playerData.personaname;
 	player.avatar = playerData.avatarfull;
-	$('#name').append(player.personaname);
 	$('#avatar').append("<img src=\"" + player.avatar + "\">");
+	$('#avatar').append("<h1>" + player.personaname);
+
 }
 
 function setGameData(data){
@@ -70,7 +71,6 @@ function setGameData(data){
 	player.totalPlayTime = 0;
 	player.gameCount = data.response.game_count;
 	player.games = data.response.games;
-	console.log(player.games.length);
 	player.unplayed = [];
 	player.played = [];
 
@@ -87,9 +87,12 @@ function setGameData(data){
 		$('#pizza').append("<li data-value=\"" + game.playtime_forever / player.totalPlayTime * 10 + "\">" + game.name + "</li>");
 		
 	});
-	$('#result').before("Total Unplayed games:" + player.unplayed.length + " games!</ br>");
-	$('#result').before("Total Played games:" + player.played.length + " games!</ br>");
-	$('#result').before("Total Play time:" + player.totalPlayTime + "mins");
+	$('#stats').append("Total games:" + player.games.length + " games!<br />");
+	$('#stats').append("Total Played games:" + player.played.length + " games!<br />");
+	$('#stats').append("Total Unplayed games:" + player.unplayed.length + " games!<br />");
+	$('#stats').append("Total Play time:" + player.totalPlayTime + "mins<br />");
+	player.displayTime = calculatePlayTime(player.totalPlayTime);
+	$('#stats').append(player.displayTime.days + " days, " + player.displayTime.hours + " hours, " + player.displayTime.minutes + " minutes");
 	//paginate(player.played.length);
 	Pizza.init();
 	$("#holder").jPages({
@@ -109,10 +112,16 @@ function paginate(games){
 	$('.pagination').append("<li class=\"arrow\"><a href=\"\">&raquo;</a></li>");*/
 }
 
-
+function calculatePlayTime(minutes){
+	time = {};
+	time.hours = Math.floor(minutes/60);
+	time.days = Math.floor(time.hours/24);
+	time.minutes = minutes % 60;
+	time.hours %= time.days;
+	return(time);
+}
 
 $("#owl-demo").owlCarousel({
-	navigation: true,
 	slideSpeed: 300,
 	paginationSpeed: 400,
 	singleItem:true,
