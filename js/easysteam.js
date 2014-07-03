@@ -28,14 +28,20 @@ function update(message){
 }
 
 function updateAllData(steamID){
-	requestData(steamID, 'getOwnedGames');
-	requestData(steamID, 'getPlayerSummaries');
+	requestData(steamID, 'getOwnedGames', {});
+	requestData(steamID, 'getPlayerSummaries', {});
+	getAchievments();
 }
 
-function requestData(steamID, request){
+function requestData(steamID, request, options){
 	nanobar.go(10);
 	update('Fetching account data.');
-	$.post( "connect.php", { steamID:steamID, request:request }, 'json')
+	if(options['appID']){ 
+		postOptions = { steamID:steamID, appID:options['appID'], request:request };
+	}else{
+		postOptions = { steamID:steamID, request:request };
+	}
+	$.post( "connect.php", postOptions, 'json')
 	//Do something success-ish
 	.done(function(data){
 		data = JSON.parse(data);
@@ -47,6 +53,9 @@ function requestData(steamID, request){
 			case 'getOwnedGames':
 			update('Game Data Received.');
 			setGameData(data);
+			break;
+			case 'getPlayerAchievements':
+			console.log(data);
 			break;
 		}
 	});
@@ -84,7 +93,6 @@ function setGameData(data){
 		}
 		if(game.playtime_2weeks){
 			recentDisplayTime = calculatePlayTime(game.playtime_2weeks);
-			console.log(recentDisplayTime);
 			player.recent.push(game);
 			$('#recent').append("<div class=\"recentGame\">");
 			$('.recentGame').last().append("<img src=\"" + "http://media.steampowered.com/steamcommunity/public/images/apps/" + game.appid + "/"+ game.img_logo_url + ".jpg\">")
@@ -148,6 +156,12 @@ $("#owl-demo").owlCarousel({
 	// itemsTablet: false,
 	// itemsMobile : false
 });
+
+function getAchievments(){
+	var steamID = $('#steamID').val();
+	var appID = 440;
+	requestData(steamID, 'getPlayerAchievements', {appID:appID});
+}
 
 
 
