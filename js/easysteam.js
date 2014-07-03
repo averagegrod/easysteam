@@ -73,6 +73,7 @@ function setGameData(data){
 	player.games = data.response.games;
 	player.unplayed = [];
 	player.played = [];
+	player.recent = [];
 
 	player.games.forEach(function(game){
 		player.totalPlayTime += game.playtime_forever;
@@ -80,6 +81,14 @@ function setGameData(data){
 		if(game.playtime_forever === 0){
 			player.unplayed.push(game);
 			player.played.pop();
+		}
+		if(game.playtime_2weeks){
+			recentDisplayTime = calculatePlayTime(game.playtime_2weeks);
+			console.log(recentDisplayTime);
+			player.recent.push(game);
+			$('#recent').append("<div class=\"recentGame\">");
+			$('.recentGame').last().append("<img src=\"" + "http://media.steampowered.com/steamcommunity/public/images/apps/" + game.appid + "/"+ game.img_logo_url + ".jpg\">")
+			$('.recentGame').last().append("<span class=\"recentTitle\">" + game.name + "</span>" + recentDisplayTime.hours + "hours: " + recentDisplayTime.minutes + " mins");
 		}
 	});
 
@@ -93,7 +102,7 @@ function setGameData(data){
 	$('#stats').append("Total Play time:" + player.totalPlayTime + "mins<br />");
 	player.displayTime = calculatePlayTime(player.totalPlayTime);
 	$('#stats').append(player.displayTime.days + " days, " + player.displayTime.hours + " hours, " + player.displayTime.minutes + " minutes");
-	//paginate(player.played.length);
+
 	Pizza.init();
 	$("#holder").jPages({
 		containerID: "pizza",
@@ -101,23 +110,14 @@ function setGameData(data){
 	});
 }
 
-function paginate(games){
-	pages = Math.floor(games/20);
-	console.log(pages);
-	for(i=0; i<pages; i++){
-		$('.pagination').append("<li><a href=\"\">" + i+1 + "</a></li>");
-
-	}
-	/*$('.pagination').prepend("<li class=\"arrow unavailable\"><a href=\"\">&laquo;</a></li>");
-	$('.pagination').append("<li class=\"arrow\"><a href=\"\">&raquo;</a></li>");*/
-}
-
 function calculatePlayTime(minutes){
 	time = {};
 	time.hours = Math.floor(minutes/60);
 	time.days = Math.floor(time.hours/24);
 	time.minutes = minutes % 60;
-	time.hours %= time.days;
+	if(time.days >0){
+		time.hours %= time.days;
+	}
 	return(time);
 }
 

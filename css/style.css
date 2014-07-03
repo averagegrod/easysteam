@@ -25,6 +25,13 @@ ol {
 #result {
   padding-top: 1em; }
 
+.recentTitle {
+  color: #f2a52b;
+  font-size: 1.4em; }
+
+.recentGame {
+  padding: .5em 0; }
+
 #update {
   height: 25px; }
 
