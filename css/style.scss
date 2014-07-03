@@ -8,6 +8,7 @@ $esGreen: #2CF285;
 $esDarkGreen: darken(#2CF285, 20%);
 $esBlue: #2C96F2;
 $esDarkBlue: darken(#2C96F2, 20%);
+$achievementSize: 64px;
 
 body{
   color: white;
@@ -47,6 +48,11 @@ ol{
 
 .recentGame{
   padding: .5em 0;
+}
+
+.achievement{
+  height:$achievementSize;
+  width:$achievementSize; 
 }
 
 #update{

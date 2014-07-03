@@ -32,6 +32,10 @@ ol {
 .recentGame {
   padding: .5em 0; }
 
+.achievement {
+  height: 64px;
+  width: 64px; }
+
 #update {
   height: 25px; }
 

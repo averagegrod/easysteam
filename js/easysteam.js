@@ -30,7 +30,7 @@ function update(message){
 function updateAllData(steamID){
 	requestData(steamID, 'getOwnedGames', {});
 	requestData(steamID, 'getPlayerSummaries', {});
-	getAchievments();
+	getAchievements();
 }
 
 function requestData(steamID, request, options){
@@ -55,10 +55,15 @@ function requestData(steamID, request, options){
 			setGameData(data);
 			break;
 			case 'getPlayerAchievements':
-			console.log(data);
+			setAchievements(data);
 			break;
+			case 'getSchema':
+			addAchievements(data);
 		}
-	});
+	})
+	.fail(function() {
+    console.log("Error:" + data);
+  });
 }
 
 function setPlayerData(data){
@@ -95,7 +100,7 @@ function setGameData(data){
 			recentDisplayTime = calculatePlayTime(game.playtime_2weeks);
 			player.recent.push(game);
 			$('#recent').append("<div class=\"recentGame\">");
-			$('.recentGame').last().append("<img src=\"" + "http://media.steampowered.com/steamcommunity/public/images/apps/" + game.appid + "/"+ game.img_logo_url + ".jpg\">")
+			$('.recentGame').last().append("<img src=\"" + "http://media.steampowered.com/steamcommunity/public/images/apps/" + game.appid + "/"+ game.img_logo_url + ".jpg\">");
 			$('.recentGame').last().append("<span class=\"recentTitle\">" + game.name + "</span>" + recentDisplayTime.hours + "hours: " + recentDisplayTime.minutes + " mins");
 		}
 	});
@@ -116,6 +121,22 @@ function setGameData(data){
 		containerID: "pizza",
 		perPage: 20
 	});
+}
+
+function setAchievements(data){
+	var steamID = $('#steamID').val();
+	var appID = 440;
+	var achievements = data.playerstats.achievements;
+	//console.log(data.playerstats.achievements);
+	achievements.forEach(function(achievement){
+		var $image = $("<img>", {id:achievement.apiname, class:"achievement"});
+		//console.log("<img id=\"" + achievement.apiname + "\" class=\"" + achievement.achieved + "\">");
+		image = $('#achievements').append($image);
+		if(achievement.achieved){
+			$image.addClass("achieved");
+		}
+		});
+	requestData(steamID, 'getSchema', {appID:appID});
 }
 
 function calculatePlayTime(minutes){
@@ -157,12 +178,28 @@ $("#owl-demo").owlCarousel({
 	// itemsMobile : false
 });
 
-function getAchievments(){
+function getAchievements(){
 	var steamID = $('#steamID').val();
 	var appID = 440;
 	requestData(steamID, 'getPlayerAchievements', {appID:appID});
 }
 
+function addAchievements(data){
+	console.log(data);
+	game = data.game;
+	achievements = game.availableGameStats.achievements;
+	achievements.forEach(function(achievement){
+		imgage = $('#' + achievement.name);
+		if(imgage.hasClass("achieved")){
+			imgage.attr("src", achievement.icon);
+		}else{
+			imgage.attr("src", achievement.icongray);
+		}
+	});
+}
 
 
 
+$( document ).ajaxError(function() {
+  console.log( "Triggered ajaxError handler." );
+});
