@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="Garrett Rodriguez">
+	<link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+	<title>Coding for GOOD</title>
+	<!--<link rel="stylesheet" type="text/css" href="http://reset5.googlecode.com/hg/reset.min.css">-->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/foundation.min.css">
+	<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="css/jPages.css">
+	<link rel="stylesheet" type="text/css" href="css/pizza.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
+
+</head>
+<body>
+	<div id="header">
+		
+
+		<div class="row">
+			<div class="small-7 small-centered columns">
+				<div class="row collapse customNavigation">
+					<div class="small-5 columns">
+						<input type="text" id="steamID" placeholder="Steam ID">
+					</div>
+					<div class="small-2 columns">
+						<a href="#" id="submit" class="button postfix">Submit</a>
+					</div>
+					<div class="small-1 small-offset-3 columns">
+						<a class="button prev right postfix">
+							<i class="fa fa-long-arrow-left"></i>
+						</a>
+					</div>
+					<div class="small-1 columns">
+						<a class="button next postfix">
+							<i class="fa fa-long-arrow-right"></i>
+						</a>
+					</div>
+					
+
+				</div>
+			</div>
+
+
+
+		</div>
+	</div>
+
+
+	<div id="container" class="row">
+		<div id="owl-demo" class="owl-carousel owl-theme">
+			<div class="small-12 columns">
+		<div class="item">
+			<div class="row">
+				<div id="result" class="small-4 columns">
+					<p id="avatar"><img src="img/steam.png"><h1>SteamUser</h1></p>
+					<p id="stats">Total games:38 games!<br>Total Played games:29 games!<br>Total Unplayed games:9 games!<br>Total Play time:17289 mins<br>12 days,0 hours, 9 minutes</p>
+				</div>
+				<div id="recent" class="small-8 columns">
+					<div class="recentGame"><img src="http://media.steampowered.com/steamcommunity/public/images/apps/205910/ca0fe3057ac0310df1e1ab290a290a8a2bc19ff9.jpg"><span class="recentTitle">Tiny and Big: Grandpa's Leftovers</span>0hours: 52 mins</div><div class="recentGame"><img src="http://media.steampowered.com/steamcommunity/public/images/apps/211420/d293c8e38f56de2c7097b2c7a975caca49029a8b.jpg"><span class="recentTitle">Dark Souls: Prepare to Die Edition</span>0hours: 9 mins</div><div class="recentGame"><img src="http://media.steampowered.com/steamcommunity/public/images/apps/220240/47811cc7821070306a24622b5d33c04c85264279.jpg"><span class="recentTitle">Far Cry® 3</span>0hours: 50 mins</div><div class="recentGame"><img src="http://media.steampowered.com/steamcommunity/public/images/apps/234650/d2ada23f204adf831dc89be7c6edbbbc38c99ef6.jpg"><span class="recentTitle">Shadowrun Returns</span>3hours: 19 mins</div><div class="recentGame"><img src="http://media.steampowered.com/steamcommunity/public/images/apps/238460/13380473acaa95f843301b8a21a383790ae384de.jpg"><span class="recentTitle">BattleBlock Theater</span>3hours: 56 mins</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+			<div class="item">
+		<div class="row">
+			<div class="small-6 columns">
+				<ul class="pagination"></ul>
+				<div id="holder"><a class="jp-previous jp-disabled">← previous</a><a class="jp-current">1</a><a>2</a>
+					<a class="jp-next jp-disabled">next →</a></div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="small-6 columns">
+				<ol data-pie-id="my-cool-chart" id="pizza" style="min-height: 400px;">
+					<li>Crysis</li>
+					<li>SimCity 4 Deluxe</li>
+					<li>Portal</li>
+					<li >Portal 2</li>
+					<li>ORION: Dino Horde</li>
+					<li>Max Payne 3</li>
+					<li>You Need A Budget 4 (YNAB)</li>
+					<li>Monaco</li>
+					<li>Rogue Legacy</li>
+					<li>Papers, Please</li>
+					<li>Democracy 3</li>
+					<li>The Stanley Parable</li>
+					<li >Goat Simulator</li>
+					<li>Child of Light</li>
+					<li>Red Orchestra 2: Heroes of Stalingrad - Single Player</li>
+					<li>Sniper Elite V2</li>
+					<li>F.E.A.R.</li>
+					<li>Mirror's Edge</li>
+					<li>Fallout 3</li>
+					<li>Dead Space</li>
+				</ol>
+			</div>
+			<div class="small-6 columns">
+			</div>
+		</div>
+	</div>
+
+			<div class="item">
+				<div id="games"></div>
+			</div>
+
+			<div class="item">
+				<div id="achievements"></div>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="footer">
+
+		<p>&copy; Garrett Rodriguez 2014</p>
+
+	</div>
+
+
+
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/foundation.min.js"></script>
+	<script src="js/nanobar.min.js"></script>
+	<script src="js/snap.svg.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/pizza.min.js"></script>
+	<script src="js/jPages.min.js"></script>
+	<script src="js/easysteam.js"></script>
+</body>
+</html>

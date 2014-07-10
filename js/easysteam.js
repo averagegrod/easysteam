@@ -1,205 +1,102 @@
-var nanobarOptions = {
-	bg: '#acf',
-	id: 'mynano'
-};
+function EasySteam(steamID){
+	this.steamID = steamID;
+	this.personaname = '';
+	this.avatar = '';
+	this.totalPlayTime = 0;
+	this.gameCount = 0;
+	this.games = 0;
+	this.unplayed = [];
+	this.played = [];
+	this.recent = [];
+	this.currentAppID = 440; //  CHANGE THIS! PULLS TF2 TO FILL DATA FOR NOW
+	this.currentAppName = '';
+	this.playerAchievements = [];
+	this.gameAchievements = [];
+	this.achieved = [];
 
-var nanobar = new Nanobar( nanobarOptions );
-
-
-$('form input').keydown(function(event){
-			/*if(event.keyCode == 13) {
-				event.preventDefault();
-				var steamID = $('#steamID').val()
-				
-				setPlayer(steamID);
-
-
-				return false;
-			}*/
-		});
-
-$('#submit').click(function(){
-	var steamID = $('#steamID').val();
-	updateAllData(steamID);
-});
-
-function update(message){
-	$('#update').html(message);
 }
 
-function updateAllData(steamID){
-	requestData(steamID, 'getOwnedGames', {});
-	requestData(steamID, 'getPlayerSummaries', {});
-	getAchievements();
-}
-
-function requestData(steamID, request, options){
-	nanobar.go(10);
-	update('Fetching account data.');
-	if(options['appID']){ 
-		postOptions = { steamID:steamID, appID:options['appID'], request:request };
-	}else{
-		postOptions = { steamID:steamID, request:request };
-	}
+EasySteam.prototype.getOwnedGames = function(callback){
+	var that = this;
+	postOptions = { steamID:that.steamID, request:'getOwnedGames' };
 	$.post( "connect.php", postOptions, 'json')
 	//Do something success-ish
-	.done(function(data){
+	.success(function(data){
 		data = JSON.parse(data);
-		switch (request) {
-			case 'getPlayerSummaries':
-			update('Player Data Received.');
-			setPlayerData(data);
-			break;
-			case 'getOwnedGames':
-			update('Game Data Received.');
-			setGameData(data);
-			break;
-			case 'getPlayerAchievements':
-			setAchievements(data);
-			break;
-			case 'getSchema':
-			addAchievements(data);
-		}
+		that.gameCount = data.response.game_count;
+		that.games = data.response.games;
+		that.games.forEach(function(game){
+			that.totalPlayTime += game.playtime_forever;
+			that.played.push(game);
+			if(game.playtime_forever === 0){
+				that.unplayed.push(game);
+				that.played.pop();
+			}
+			if(game.playtime_2weeks){
+				that.recent.push(game);
+			}
+		});
+		callback(that);
 	})
 	.fail(function() {
-    console.log("Error:" + data);
-  });
-}
-
-function setPlayerData(data){
-	update('Figuring out who you are.');
-	nanobar.go(15);
-	player = {};
-	playerData = data.response.players[0];
-	player.personaname = playerData.personaname;
-	player.avatar = playerData.avatarfull;
-	$('#avatar').append("<img src=\"" + player.avatar + "\">");
-	$('#avatar').append("<h1>" + player.personaname);
-
-}
-
-function setGameData(data){
-	update('Counting up your games');
-	nanobar.go(20);
-	player = {};
-	player.totalPlayTime = 0;
-	player.gameCount = data.response.game_count;
-	player.games = data.response.games;
-	player.unplayed = [];
-	player.played = [];
-	player.recent = [];
-
-	player.games.forEach(function(game){
-		player.totalPlayTime += game.playtime_forever;
-		player.played.push(game);
-		if(game.playtime_forever === 0){
-			player.unplayed.push(game);
-			player.played.pop();
-		}
-		if(game.playtime_2weeks){
-			recentDisplayTime = calculatePlayTime(game.playtime_2weeks);
-			player.recent.push(game);
-			$('#recent').append("<div class=\"recentGame\">");
-			$('.recentGame').last().append("<img src=\"" + "http://media.steampowered.com/steamcommunity/public/images/apps/" + game.appid + "/"+ game.img_logo_url + ".jpg\">");
-			$('.recentGame').last().append("<span class=\"recentTitle\">" + game.name + "</span>" + recentDisplayTime.hours + "hours: " + recentDisplayTime.minutes + " mins");
-		}
+		console.log("Error:" + data);
 	});
+};
 
-	player.played.forEach(function(game){
-		$('#pizza').append("<li data-value=\"" + game.playtime_forever / player.totalPlayTime * 10 + "\">" + game.name + "</li>");
-		
+EasySteam.prototype.getPlayerSummaries = function(callback){
+	var that = this;
+	postOptions = { steamID:that.steamID, request:'getPlayerSummaries' };
+	$.post( "connect.php", postOptions, 'json')
+	//Do something success-ish
+	.success(function(data){
+		data = JSON.parse(data);
+		//console.log(data);
+		//console.log(data.response);
+		//console.log(data.response.players);
+		playerData = data.response.players[0];
+		that.personaname = playerData.personaname;
+		that.avatar = playerData.avatarfull;
+		callback(that);
+	})
+	.fail(function() {
+		console.log("Error:" + data);
 	});
-	$('#stats').append("Total games:" + player.games.length + " games!<br />");
-	$('#stats').append("Total Played games:" + player.played.length + " games!<br />");
-	$('#stats').append("Total Unplayed games:" + player.unplayed.length + " games!<br />");
-	$('#stats').append("Total Play time:" + player.totalPlayTime + "mins<br />");
-	player.displayTime = calculatePlayTime(player.totalPlayTime);
-	$('#stats').append(player.displayTime.days + " days, " + player.displayTime.hours + " hours, " + player.displayTime.minutes + " minutes");
+};
 
-	Pizza.init();
-	$("#holder").jPages({
-		containerID: "pizza",
-		perPage: 20
+EasySteam.prototype.getPlayerAchievements = function(appID, callback){
+	var that = this;
+	that.currentAppID = appID;
+	postOptions = { steamID:that.steamID, appID:that.currentAppID, request:'getPlayerAchievements' };
+	$.post( "connect.php", postOptions, 'json')
+	//Do something success-ish
+	.success(function(data){
+		data = JSON.parse(data);
+		that.currentAppName = data.playerstats.gameName;
+		that.playerAchievements = data.playerstats.achievements;
+		that.playerAchievements.forEach(function(achievement){
+			if(achievement.achieved){
+				that.achieved.push(achievement);
+			}
+		//that.getSchema(that.currentAppID);
 	});
-}
-
-function setAchievements(data){
-	var steamID = $('#steamID').val();
-	var appID = 440;
-	var achievements = data.playerstats.achievements;
-	//console.log(data.playerstats.achievements);
-	achievements.forEach(function(achievement){
-		var $image = $("<img>", {id:achievement.apiname, class:"achievement"});
-		//console.log("<img id=\"" + achievement.apiname + "\" class=\"" + achievement.achieved + "\">");
-		image = $('#achievements').append($image);
-		if(achievement.achieved){
-			$image.addClass("achieved");
-		}
-		});
-	requestData(steamID, 'getSchema', {appID:appID});
-}
-
-function calculatePlayTime(minutes){
-	time = {};
-	time.hours = Math.floor(minutes/60);
-	time.days = Math.floor(time.hours/24);
-	time.minutes = minutes % 60;
-	if(time.days >0){
-		time.hours %= time.days;
-	}
-	return(time);
-}
-
-$("#owl-demo").owlCarousel({
-	slideSpeed: 300,
-	paginationSpeed: 400,
-	singleItem:true,
-	afterInit: function(elem){
-		$(".next").click(function(){
-			$("#owl-demo").trigger('owl.next');
-		});
-		$(".prev").click(function(){
-			$("#owl-demo").trigger('owl.prev');
-		});
-		$(".play").click(function(){
-			$("#owl-demo").trigger('owl.play',1000); //owl.play event accept autoPlay speed as second parameter
-		});
-		$(".stop").click(function(){
-			$("#owl-demo").trigger('owl.stop');
-		});
-
-	}
-
-	// "singleItem:true" is a shortcut for:
-	// items : 1, 
-	// itemsDesktop : false,
-	// itemsDesktopSmall : false,
-	// itemsTablet: false,
-	// itemsMobile : false
-});
-
-function getAchievements(){
-	var steamID = $('#steamID').val();
-	var appID = 440;
-	requestData(steamID, 'getPlayerAchievements', {appID:appID});
-}
-
-function addAchievements(data){
-	console.log(data);
-	game = data.game;
-	achievements = game.availableGameStats.achievements;
-	achievements.forEach(function(achievement){
-		imgage = $('#' + achievement.name);
-		if(imgage.hasClass("achieved")){
-			imgage.attr("src", achievement.icon);
-		}else{
-			imgage.attr("src", achievement.icongray);
-		}
+		that.getSchema(callback);
+	})
+	.fail(function() {
+		console.log("Error:" + data);
 	});
-}
+};
 
-
-
-$( document ).ajaxError(function() {
-  console.log( "Triggered ajaxError handler." );
-});
+EasySteam.prototype.getSchema = function(callback){
+	var that = this;
+	postOptions = { steamID:that.steamID, appID:that.currentAppID, request:'getSchema' };
+	$.post( "connect.php", postOptions, 'json')
+	//Do something success-ish
+	.success(function(data){
+		data = JSON.parse(data);
+		that.gameAchievements = data.game.availableGameStats.achievements;
+		callback(that);
+	})
+	.fail(function() {
+		console.log("Error:" + data);
+	});
+};

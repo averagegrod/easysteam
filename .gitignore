@@ -1,7 +1,8 @@
-connect.php
 foundation.txt
 
 css/.sass-cache
 css/bourbon
 
 *.ini
+
+/img
