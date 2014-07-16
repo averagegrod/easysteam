@@ -1,7 +1,9 @@
-foundation.txt
+/ignore
+connect.php
 
 css/.sass-cache
 css/bourbon
+css/fonts
 
 *.ini
 

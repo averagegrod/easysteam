@@ -1,0 +1,28 @@
+@import "bourbon/bourbon";
+
+@include font-face(tf2, 'fonts/TF2');
+@include font-face(tf2build, 'fonts/tf2build');
+@include font-face(tf2professor, 'fonts/tf2professor');
+@include font-face(tf2secondary, 'fonts/TF2secondary');
+@include font-face(din1451, 'fonts/din1451');
+
+$fontTestHeight: 2rem;
+
+.secondary{
+  font-family: "tf2secondary";
+  font-size: $fontTestHeight;
+}
+
+.build{
+  font-family: "tf2build";
+  font-size: $fontTestHeight;
+}
+
+.professor{
+  font-family: "tf2professor";
+  font-size: $fontTestHeight;
+}
+.din1451{
+  font-family: "din1451";
+  font-size: $fontTestHeight;
+}

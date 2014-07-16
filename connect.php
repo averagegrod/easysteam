@@ -1,6 +1,6 @@
 <?php
 	$apikey = ''; // put your API key here 
-		switch ($_POST['request']){
+	switch ($_POST['request']){
 		case "getPlayerSummaries":
 		$response = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' . $apikey . '&steamids=' . $_POST["steamID"]);
 		break;
@@ -13,6 +13,32 @@
 		case "getSchema":
 		$response = file_get_contents('http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?appid=' . $_POST["appID"] . '&key=' . $apikey);
 		break;
-}
+	}
 	echo $response;
-?>
+
+	function steamToCommunity($idString){
+		$idString = ($idString - 76561197960265728) / 2;
+		return $idString;
+
+	}
+
+	function SteamIDStringToSteamID($idString, $type = 1, $instance = 1) {
+		$parts = explode(':', str_replace('STEAM_', '', $idString));
+
+		echo("<pre>parts: " );
+		var_dump($parts);
+		echo("</pre>");
+	// You should check here that $parts is valid
+
+		$universe = (int)$parts[0];
+		if ($universe == 0) {
+			$universe = 1;
+		}
+
+		$steamID = ($universe << 56) | ($type << 52) | ($instance << 32) | ((int)$parts[2] << 1) | (int)$parts[1];
+
+		var_dump($universe<<56);
+		return $steamID;
+	}
+
+	?>

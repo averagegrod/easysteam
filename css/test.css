@@ -1,0 +1,45 @@
+@font-face {
+  font-family: tf2;
+  font-weight: normal;
+  font-style: normal;
+  src: url("fonts/TF2.eot");
+  src: url("fonts/TF2.eot?#iefix") format("embedded-opentype"), url("fonts/TF2.woff") format("woff"), url("fonts/TF2.ttf") format("truetype"), url("fonts/TF2.svg#tf2") format("svg"); }
+@font-face {
+  font-family: tf2build;
+  font-weight: normal;
+  font-style: normal;
+  src: url("fonts/tf2build.eot");
+  src: url("fonts/tf2build.eot?#iefix") format("embedded-opentype"), url("fonts/tf2build.woff") format("woff"), url("fonts/tf2build.ttf") format("truetype"), url("fonts/tf2build.svg#tf2build") format("svg"); }
+@font-face {
+  font-family: tf2professor;
+  font-weight: normal;
+  font-style: normal;
+  src: url("fonts/tf2professor.eot");
+  src: url("fonts/tf2professor.eot?#iefix") format("embedded-opentype"), url("fonts/tf2professor.woff") format("woff"), url("fonts/tf2professor.ttf") format("truetype"), url("fonts/tf2professor.svg#tf2professor") format("svg"); }
+@font-face {
+  font-family: tf2secondary;
+  font-weight: normal;
+  font-style: normal;
+  src: url("fonts/TF2secondary.eot");
+  src: url("fonts/TF2secondary.eot?#iefix") format("embedded-opentype"), url("fonts/TF2secondary.woff") format("woff"), url("fonts/TF2secondary.ttf") format("truetype"), url("fonts/TF2secondary.svg#tf2secondary") format("svg"); }
+@font-face {
+  font-family: din1451;
+  font-weight: normal;
+  font-style: normal;
+  src: url("fonts/din1451.eot");
+  src: url("fonts/din1451.eot?#iefix") format("embedded-opentype"), url("fonts/din1451.woff") format("woff"), url("fonts/din1451.ttf") format("truetype"), url("fonts/din1451.svg#din1451") format("svg"); }
+.secondary {
+  font-family: "tf2secondary";
+  font-size: 2rem; }
+
+.build {
+  font-family: "tf2build";
+  font-size: 2rem; }
+
+.professor {
+  font-family: "tf2professor";
+  font-size: 2rem; }
+
+.din1451 {
+  font-family: "din1451";
+  font-size: 2rem; }

@@ -1,5 +1,12 @@
 @import "bourbon/bourbon";
 
+@include font-face(tf2, 'fonts/TF2');
+@include font-face(tf2build, 'fonts/tf2build');
+@include font-face(tf2professor, 'fonts/tf2professor');
+@include font-face(tf2secondary, 'fonts/TF2secondary');
+@include font-face(din1451, 'fonts/din1451');
+
+
 $esOrange: #F2A52B;
 $esDarkOrange: darken(#F2A52B, 20%);
 $esRed: #F2502C;
@@ -10,6 +17,8 @@ $esBlue: #2C96F2;
 $esDarkBlue: darken(#2C96F2, 20%);
 $achievementSize: 64px;
 $footerHeight: 60px;
+
+$fontTestHeight: 2rem;
 
 body{
   color: white;
@@ -32,6 +41,10 @@ body{
   top: -160px;
   left: -100px;
   width: 120%;
+}
+
+h1{
+  font-family:"tf2";
 }
 
 text{
