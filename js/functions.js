@@ -5,28 +5,57 @@ var nanobarOptions = {
 
 var nanobar = new Nanobar( nanobarOptions );
 
-
-$('form input').keydown(function(event){
-			/*if(event.keyCode == 13) {
-				event.preventDefault();
-				var steamID = $('#steamID').val()
-				
-				setPlayer(steamID);
-
-
-				return false;
-			}*/
+var owlOptions = {
+	slideSpeed: 300,
+	paginationSpeed: 400,
+	singleItem:true,
+	//autoHeight:true,
+	afterInit: function(elem){
+		
+		$(".play").click(function(){
+			myOwl.trigger('owl.play',1000); //owl.play event accept autoPlay speed as second parameter
 		});
+		$(".stop").click(function(){
+			myOwl.trigger('owl.stop');
+		});
+	}
+};
+
+var myOwl = $("#steamOwl");
+myOwl.owlCarousel(owlOptions);
+$(".next").click(function(elem){
+	elem.preventDefault();
+	myOwl.trigger('owl.next');
+	console.log("next");
+});
+$(".prev").click(function(){
+	myOwl.trigger('owl.prev');
+});
+
+$('#steamID').keydown(function(e){
+	if(e.keyCode == 13){
+		init();
+	}
+});
 
 $('#submit').click(function(){
+	init();
+});
+
+function init(){
 	var steamID = $('#steamID').val();
 	var player = new EasySteam(steamID);
 	clear();
 
+	loadSlides();
 	player.getPlayerSummaries(displayPlayerData);
 	player.getOwnedGames(displayGameData);
-	//player.getPlayerAchievements(player.currentAppID);
+}
 
+
+$('#tutorial').click(function(){
+	clear();
+	loadDemoContent();
 });
 
 function update(message){
@@ -44,53 +73,50 @@ function calculatePlayTime(minutes){
 	return(time);
 }
 
-$("#owl-demo").owlCarousel({
-	slideSpeed: 300,
-	paginationSpeed: 400,
-	singleItem:true,
-	//autoHeight:true,
-	afterInit: function(elem){
-		$(".next").click(function(){
-			$("#owl-demo").trigger('owl.next');
-		});
-		$(".prev").click(function(){
-			$("#owl-demo").trigger('owl.prev');
-		});
-		$(".play").click(function(){
-			$("#owl-demo").trigger('owl.play',1000); //owl.play event accept autoPlay speed as second parameter
-		});
-		$(".stop").click(function(){
-			$("#owl-demo").trigger('owl.stop');
-		});
 
-	}
-
-	// "singleItem:true" is a shortcut for:
-	// items : 1, 
-	// itemsDesktop : false,
-	// itemsDesktopSmall : false,
-	// itemsTablet: false,
-	// itemsMobile : false
-});
 
 
 function clear(){
+	$(".owl-item").each(function(){
+		myOwl.data('owlCarousel').removeItem();
+	});
+/*
 	//slide1
 	$("#avatar, #stats, #recent").empty();
 	
 	//slide 2
-	$("#holder").jPages("destroy");
-	$("#holder, #pizza, #my-cool-chart").empty();
+	if($("#holder").length){
+		$("#holder").jPages("destroy");
+		$("#holder, #pizza, #my-cool-chart").empty();
+	}
 
 	//slide 3
-	$("#games").empty();
+	$("#games").empty();*/
 }
 
 function clearAchievements(){
-	$("#achievements").empty();
+	//myOwl.data('owlCarousel').removeItem();
+	$('#achievements').empty();
+}
+
+function loadSlides(){
+	var $slide1 = $('<div>', {class:"item"});
+	var $slide2 = $('<div>', {class:"item"});
+	var $slide3 = $('<div>', {class:"item"});
+	var $slide4 = $('<div>', {class:"item"});
+	$slide1.load('owlGuts.html #slide1');
+	$slide2.load('owlGuts.html #slide2');
+	$slide3.load('owlGuts.html #slide3');
+	$slide4.load('owlGuts.html #slide4');
+
+	myOwl.data('owlCarousel').addItem($slide1);
+	myOwl.data('owlCarousel').addItem($slide2);
+	myOwl.data('owlCarousel').addItem($slide3);
+	myOwl.data('owlCarousel').addItem($slide4);
 }
 
 function displayPlayerData(player){
+	
 	$('#avatar').append("<img src=\"" + player.avatar + "\">");
 	$('#avatar').append("<h1>" + player.personaname);
 }
@@ -115,9 +141,9 @@ function displayGameData(player){
 			$('#games').append($link);
 			$link.append($game);
 			$link.click(function(){
+
 				clearAchievements();
 				player.getPlayerAchievements(game.appid, displayAchievements);
-				$("#owl-demo").trigger('owl.next');
 				window.scrollTo(0,0);
 			});
 		}
@@ -142,7 +168,6 @@ function displayGameData(player){
 }
 
 function displayAchievements(player){
-	console.log(player);
 	
 	player.playerAchievements.forEach(function(achievement){
 		var $image = $("<img>", {id:achievement.apiname ,class:"achievement"});
@@ -160,6 +185,7 @@ function displayAchievements(player){
 			imgage.attr("src", achievement.icongray);
 		}
 	});
+	myOwl.data('owlCarousel').goTo(3);
 }
 
 
@@ -173,3 +199,22 @@ $("#holder").jPages({
 $( document ).ajaxError(function() {
 	console.log( "Triggered ajaxError handler." );
 });
+
+function loadDemoContent(){
+	var $playerSlide = $('<div>', {class:"item"});
+	var $playerGameSlide = $('<div>', {class:"item"});
+	$playerSlide.load('ignore/demo.html #demoUser');
+	
+	myOwl.data('owlCarousel').addItem($playerSlide);
+	$playerGameSlide.load('ignore/demo.html #demoGame', function(){
+		myOwl.data('owlCarousel').addItem($playerGameSlide);
+		Pizza.init();
+		$("#holder").jPages({
+			containerID: "pizza",
+			perPage: 20
+		});
+	});
+
+	
+
+}

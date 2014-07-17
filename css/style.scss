@@ -1,12 +1,5 @@
 @import "bourbon/bourbon";
 
-@include font-face(tf2, 'fonts/TF2');
-@include font-face(tf2build, 'fonts/tf2build');
-@include font-face(tf2professor, 'fonts/tf2professor');
-@include font-face(tf2secondary, 'fonts/TF2secondary');
-@include font-face(din1451, 'fonts/din1451');
-
-
 $esOrange: #F2A52B;
 $esDarkOrange: darken(#F2A52B, 20%);
 $esRed: #F2502C;
@@ -17,8 +10,7 @@ $esBlue: #2C96F2;
 $esDarkBlue: darken(#2C96F2, 20%);
 $achievementSize: 64px;
 $footerHeight: 60px;
-
-$fontTestHeight: 2rem;
+@include font-face(tf2professor, 'fonts/tf2professor');
 
 body{
   color: white;
@@ -30,6 +22,11 @@ body{
 #header{
   padding-top: 1em;
   border-bottom: solid 1px grey;
+}
+
+#tutorial{
+  font-family: "tf2professor";
+  font-size: 2.5rem;
 }
 
 #container{
@@ -96,45 +93,45 @@ ol{
     color: lighten($esDarkRed, $i*4% ); }
   }
 
-@for $i from 1 through 10{
-  [data-pie-id] > *:nth-child(40n+#{$i+10}), [data-bar-id] > *:nth-child(40n+#{$i+10}), [data-line-id] > *:nth-child(40n+#{$i+10}) {
-    color: lighten($esDarkOrange, $i*4% ); }
-  }
-
-@for $i from 1 through 10{
-  [data-pie-id] > *:nth-child(40n+#{$i+20}), [data-bar-id] > *:nth-child(40n+#{$i+20}), [data-line-id] > *:nth-child(40n+#{$i+20}) {
-    color: lighten($esDarkGreen, $i*4% ); }
-  }
-
-@for $i from 1 through 10{
-  [data-pie-id] > *:nth-child(40n+#{$i+30}), [data-bar-id] > *:nth-child(40n+#{$i+30}), [data-line-id] > *:nth-child(40n+#{$i+30}) {
-    color: lighten($esDarkBlue, $i*4% ); }
-  }
-
-#holder{
-  a{
-    color: white;
-    padding: 0px 5px;
-
-    &:hover{
-      background-color: $esGreen;
-      border-radius: 5px;
+  @for $i from 1 through 10{
+    [data-pie-id] > *:nth-child(40n+#{$i+10}), [data-bar-id] > *:nth-child(40n+#{$i+10}), [data-line-id] > *:nth-child(40n+#{$i+10}) {
+      color: lighten($esDarkOrange, $i*4% ); }
     }
-    
-  }
-  background-color: $esOrange;
-  padding-top: 1rem;
-  padding-right: 2rem;
-  padding-bottom: 1.0625rem;
-  padding-left: 2rem;
-}
 
-.jp-current{
-  background-color: $esBlue;
-  border-radius: 5px;
-  
-}
+    @for $i from 1 through 10{
+      [data-pie-id] > *:nth-child(40n+#{$i+20}), [data-bar-id] > *:nth-child(40n+#{$i+20}), [data-line-id] > *:nth-child(40n+#{$i+20}) {
+        color: lighten($esDarkGreen, $i*4% ); }
+      }
 
-a.jp-current:hover{
-    font-weight: normal;
-  }
+      @for $i from 1 through 10{
+        [data-pie-id] > *:nth-child(40n+#{$i+30}), [data-bar-id] > *:nth-child(40n+#{$i+30}), [data-line-id] > *:nth-child(40n+#{$i+30}) {
+          color: lighten($esDarkBlue, $i*4% ); }
+        }
+
+        #holder{
+          a{
+            color: white;
+            padding: 0px 5px;
+
+            &:hover{
+              background-color: $esGreen;
+              border-radius: 5px;
+            }
+
+          }
+          background-color: $esOrange;
+          padding-top: 1rem;
+          padding-right: 2rem;
+          padding-bottom: 1.0625rem;
+          padding-left: 2rem;
+        }
+
+        .jp-current{
+          background-color: $esBlue;
+          border-radius: 5px;
+
+        }
+
+        a.jp-current:hover{
+          font-weight: normal;
+        }
