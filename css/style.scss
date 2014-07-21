@@ -18,6 +18,9 @@ body{
   height: 100%;
   @include linear-gradient(#444444 20%, #000000 100%);
 }
+#demoGame, #demoUser{
+  display: none;
+}
 
 #header{
   padding-top: 1em;
@@ -35,7 +38,7 @@ body{
 
 #my-cool-chart{
   position: inherit;
-  top: -160px;
+  top: -100px;
   left: -100px;
   width: 120%;
 }
