@@ -26,6 +26,12 @@ body {
 #container {
   margin-bottom: 60px; }
 
+[data-abide] small.error {
+  top: 2.4rem;
+  left: .95rem;
+  position: absolute;
+  background-color: #f2502c; }
+
 #my-cool-chart {
   position: inherit;
   top: -100px;

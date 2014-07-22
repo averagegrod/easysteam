@@ -36,6 +36,13 @@ body{
   margin-bottom: $footerHeight;
 }
 
+[data-abide] small.error{
+  top:2.4rem;
+  left:.95rem;
+  position: absolute;
+  background-color: $esRed;
+}
+
 #my-cool-chart{
   position: inherit;
   top: -100px;

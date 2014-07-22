@@ -22,18 +22,21 @@
 	<div id="header">
 		
 		<div class="row">
-			<div class="small-2 columns">
-				<a href="#" id="tutorial" class="button postfix professsor">Show Me!</a>
+			<div class="small-3 columns">
+				<a href="#" id="tutorial" class="button postfix professsor">How does this work?</a>
 			</div>
-			<div class="small-7 small-centered columns">
-				<div class="row collapse customNavigation">
-					<div class="small-5 columns">
-						<input type="text" id="steamID" placeholder="Steam ID">
-					</div>
-					<div class="small-2 columns">
-						<a href="#" id="submit" class="button postfix">Submit</a>
-					</div>
-					<div class="small-1 small-offset-3 columns">
+			<div class="small-6 small-centered columns">
+				<form data-abide="ajax" id="steamForm">
+					<div class="row collapse customNavigation">
+						<div class="small-5 columns">
+							<input type="text" pattern="integer" placeholder="Steam ID"  id="steamID" required>
+						</div>
+						<small class="error">Please input a valid Steam ID.</small>
+						<div class="small-3 columns">
+							<button type="submit" class="postfix">Submit</button>
+						</div>
+					</form>
+					<div class="small-1 small-offset-2 columns">
 						<a id="left" class="button prev right postfix">
 							<i class="fa fa-long-arrow-left"></i>
 						</a>
@@ -43,8 +46,6 @@
 							<i class="fa fa-long-arrow-right"></i>
 						</a>
 					</div>
-					
-
 				</div>
 			</div>
 
@@ -60,7 +61,6 @@
 					<h1>Easy Steam</h1>
 					<p>If you know your steam ID you can type it in above.</p>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -155,14 +155,14 @@
 	</div>
 
 
-		<script src="js/jquery-1.7.1.min.js"></script>
-		<script src="js/foundation.min.js"></script>
-		<script src="js/nanobar.min.js"></script>
-		<script src="js/snap.svg.min.js"></script>
-		<script src="js/owl.carousel.min.js"></script>
-		<script src="js/pizza.min.js"></script>
-		<script src="js/jPages.min.js"></script>
-		<script src="js/easysteam.js"></script>
-		<script src="js/functions.js"></script>
-	</body>
-	</html>
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/foundation.min.js"></script>
+	<script src="js/nanobar.min.js"></script>
+	<script src="js/snap.svg.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/pizza.min.js"></script>
+	<script src="js/jPages.min.js"></script>
+	<script src="js/easysteam.js"></script>
+	<script src="js/functions.js"></script>
+</body>
+</html>

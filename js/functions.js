@@ -1,3 +1,5 @@
+$(document).foundation();
+
 var $demoSlide0 = $('#demoUser');
 var $demoSlide1 = $('#demoGame');
 var $demoSlide2 = $('#demoGames');
@@ -36,14 +38,16 @@ $(".prev").click(function(){
 	myOwl.trigger('owl.prev');
 });
 
-$('#steamID').keydown(function(e){
-	if(e.keyCode == 13){
-		init();
-	}
-});
+$('#steamForm')
+.on('invalid.fndtn.abide', function () {
+	//var invalid_fields = $(this).find('[data-invalid]');
+	//console.log(invalid_fields);
 
-$('#submit').click(function(){
+	$("#steamForm small.error").show();
+})
+.on('valid.fndtn.abide', function () {
 	init();
+	$("#steamForm small.error").hide();
 });
 
 function init(){
@@ -257,13 +261,13 @@ function tourStep(e){
 		myOwl.trigger('owl.next');
 		break;
 		case 3:
-			myOwl.trigger('owl.next');
+		myOwl.trigger('owl.next');
 		break;
 
 		case 4:
-			myOwl.trigger('owl.next');
+		myOwl.trigger('owl.next');
 		break;
 
 
-		}
 	}
+}
