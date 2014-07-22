@@ -1,5 +1,9 @@
-var $playerSlide = $('#demoUser');
-var $playerGameSlide = $('#demoGame');
+var $demoSlide0 = $('#demoUser');
+var $demoSlide1 = $('#demoGame');
+var $demoSlide2 = $('#demoGames');
+var $demoSlide3 = $('#demoAchievements');
+var demoSlides = [$demoSlide0, $demoSlide1, $demoSlide2, $demoSlide3];
+
 
 var nanobarOptions = {
 	bg: '#acf',
@@ -65,7 +69,7 @@ $('#tutorial').click(function(){
 				console.log(event);
 			},
 			post_ride_callback : function(){
-
+				clear();
 				myOwl.data('owlCarousel').destroy();
 				$('#demoUser').toggle();
 				$('#demoGame').toggle();
@@ -229,13 +233,12 @@ function loadDemoContent(){
 	myOwl.data('owlCarousel').destroy();
 	myOwl.owlCarousel(demoOptions);
 
-	//var $playerSlide = $('<div>', {class:"item"});
-	//$playerSlide.load('ignore/demo.html #demoUser');
-	$playerSlide.toggle();
-	$playerGameSlide.toggle();
-	console.log($playerGameSlide);
-	myOwl.data('owlCarousel').addItem($playerSlide);
-	myOwl.data('owlCarousel').addItem($playerGameSlide);
+	demoSlides.map(function(slide){
+		console.log(slide);
+		slide.toggle();
+		myOwl.data('owlCarousel').addItem(slide);
+	});
+	
 	Pizza.init();
 	$("#holder").jPages({
 		containerID: "pizza",
@@ -245,18 +248,22 @@ function loadDemoContent(){
 }
 
 function tourStep(e){
-	console.log(e);
 	switch(e){
 		case 0:
-			$(".joyride-modal-bg").show();
-			loadDemoContent();
+		$(".joyride-modal-bg").show();
+		loadDemoContent();
 		break;
 		case 2:
+		myOwl.trigger('owl.next');
+		break;
+		case 3:
 			myOwl.trigger('owl.next');
-			//var o = $("#tourStep3");
-			//var offset = o.offset();
-			//$("[data-index=3]").offset({top: offset.top, left: offset.left});
 		break;
 
+		case 4:
+			myOwl.trigger('owl.next');
+		break;
+
+
+		}
 	}
-}

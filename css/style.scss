@@ -18,7 +18,7 @@ body{
   height: 100%;
   @include linear-gradient(#444444 20%, #000000 100%);
 }
-#demoGame, #demoUser{
+#demoGame, #demoUser, #demoGames, #demoAchievements{
   display: none;
 }
 
