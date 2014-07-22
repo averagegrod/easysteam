@@ -1,3 +1,10 @@
+var $demoSlide0 = $('#demoUser');
+var $demoSlide1 = $('#demoGame');
+var $demoSlide2 = $('#demoGames');
+var $demoSlide3 = $('#demoAchievements');
+var demoSlides = [$demoSlide0, $demoSlide1, $demoSlide2, $demoSlide3];
+
+
 var nanobarOptions = {
 	bg: '#acf',
 	id: 'mynano'
@@ -5,29 +12,26 @@ var nanobarOptions = {
 
 var nanobar = new Nanobar( nanobarOptions );
 
+var demoOptions = {
+	slideSpeed: 0,
+	singleItem:true,
+};
+
 var owlOptions = {
 	slideSpeed: 300,
 	paginationSpeed: 400,
 	singleItem:true,
-	//autoHeight:true,
-	afterInit: function(elem){
-		
-		$(".play").click(function(){
-			myOwl.trigger('owl.play',1000); //owl.play event accept autoPlay speed as second parameter
-		});
-		$(".stop").click(function(){
-			myOwl.trigger('owl.stop');
-		});
-	}
 };
 
 var myOwl = $("#steamOwl");
 myOwl.owlCarousel(owlOptions);
+
 $(".next").click(function(elem){
 	elem.preventDefault();
 	myOwl.trigger('owl.next');
 	console.log("next");
 });
+
 $(".prev").click(function(){
 	myOwl.trigger('owl.prev');
 });
@@ -46,6 +50,7 @@ function init(){
 	var steamID = $('#steamID').val();
 	var player = new EasySteam(steamID);
 	clear();
+	clearAchievements();
 
 	loadSlides();
 	player.getPlayerSummaries(displayPlayerData);
@@ -55,7 +60,25 @@ function init(){
 
 $('#tutorial').click(function(){
 	clear();
-	loadDemoContent();
+	clearAchievements();
+	$(document).foundation({
+		joyride: {
+			modal: true,
+			post_step_callback : function (event) {
+				tourStep(event);
+				console.log(event);
+			},
+			post_ride_callback : function(){
+				clear();
+				myOwl.data('owlCarousel').destroy();
+				$('#demoUser').toggle();
+				$('#demoGame').toggle();
+				myOwl.owlCarousel(owlOptions);
+			}
+
+		}
+	}).foundation('joyride', 'start');
+	
 });
 
 function update(message){
@@ -100,7 +123,7 @@ function clearAchievements(){
 }
 
 function loadSlides(){
-	var $slide1 = $('<div>', {class:"item"});
+	/*var $slide1 = $('<div>', {class:"item"});
 	var $slide2 = $('<div>', {class:"item"});
 	var $slide3 = $('<div>', {class:"item"});
 	var $slide4 = $('<div>', {class:"item"});
@@ -112,7 +135,13 @@ function loadSlides(){
 	myOwl.data('owlCarousel').addItem($slide1);
 	myOwl.data('owlCarousel').addItem($slide2);
 	myOwl.data('owlCarousel').addItem($slide3);
-	myOwl.data('owlCarousel').addItem($slide4);
+	myOwl.data('owlCarousel').addItem($slide4);*/
+
+	for(i=1; i<5; i++){
+		var $slide = $('<div>', {class:"item"});
+		$slide.load('owlGuts.html #slide'+i);
+		myOwl.data('owlCarousel').addItem($slide);
+	}
 }
 
 function displayPlayerData(player){
@@ -151,7 +180,7 @@ function displayGameData(player){
 
 	player.recent.forEach(function(game){
 		recentDisplayTime = calculatePlayTime(game.playtime_2weeks);
-		$('#recent').append("<div class=\"recentGame\">");
+		$('#recent').append('<div class=\"recentGame\">');
 		$('.recentGame').last().append("<img src=\"" + "http://media.steampowered.com/steamcommunity/public/images/apps/" + game.appid + "/"+ game.img_logo_url + ".jpg\">");
 		$('.recentGame').last().append("<span class=\"recentTitle\">" + game.name + "</span>" + recentDisplayTime.hours + "hours: " + recentDisplayTime.minutes + " mins");
 	});
@@ -168,7 +197,7 @@ function displayGameData(player){
 }
 
 function displayAchievements(player){
-	
+
 	player.playerAchievements.forEach(function(achievement){
 		var $image = $("<img>", {id:achievement.apiname ,class:"achievement"});
 		$('#achievements').append($image);
@@ -201,20 +230,40 @@ $( document ).ajaxError(function() {
 });
 
 function loadDemoContent(){
-	var $playerSlide = $('<div>', {class:"item"});
-	var $playerGameSlide = $('<div>', {class:"item"});
-	$playerSlide.load('ignore/demo.html #demoUser');
+	myOwl.data('owlCarousel').destroy();
+	myOwl.owlCarousel(demoOptions);
+
+	demoSlides.map(function(slide){
+		console.log(slide);
+		slide.toggle();
+		myOwl.data('owlCarousel').addItem(slide);
+	});
 	
-	myOwl.data('owlCarousel').addItem($playerSlide);
-	$playerGameSlide.load('ignore/demo.html #demoGame', function(){
-		myOwl.data('owlCarousel').addItem($playerGameSlide);
-		Pizza.init();
-		$("#holder").jPages({
-			containerID: "pizza",
-			perPage: 20
-		});
+	Pizza.init();
+	$("#holder").jPages({
+		containerID: "pizza",
+		perPage: 20
 	});
 
-	
-
 }
+
+function tourStep(e){
+	switch(e){
+		case 0:
+		$(".joyride-modal-bg").show();
+		loadDemoContent();
+		break;
+		case 2:
+		myOwl.trigger('owl.next');
+		break;
+		case 3:
+			myOwl.trigger('owl.next');
+		break;
+
+		case 4:
+			myOwl.trigger('owl.next');
+		break;
+
+
+		}
+	}
