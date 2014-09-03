@@ -14,6 +14,6 @@ Third slide: All of the games you have played that have achievements. Click on a
 
 Fourth slide: A listing of your completed achievements and those you still need to track down.
 
-I've got [roadmap](https://github.com/averagegrod/easysteam/wiki/Current-Roadmap) on the wiki and I'm open to help or suggestions. If you have a feature you'd like to see please request it or build it.
+I've got a [roadmap](https://github.com/averagegrod/easysteam/wiki/Current-Roadmap) on the wiki and I'm open to help or suggestions. If you have a feature you'd like to see please request it or build it.
 
 Absolutly NOTHING about your account is stored and all of the code is available right here. If you do fork this make sure you add your Steam API key to `connect.php` but make sure that you DO NOT accidentally upload it to GitHub or any other publicly visible location. Also, please ensure that you comply with Valve's [API terms of service](http://steamcommunity.com/dev/apiterms).
