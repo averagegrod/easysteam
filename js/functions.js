@@ -69,6 +69,7 @@ function init(){
 $('#tutorial').click(function(){
 	clear();
 	clearAchievements();
+	$("#steamID").val("76561197960435530");
 	$(document).foundation({
 		joyride: {
 			modal: true,
@@ -243,9 +244,8 @@ $( document ).ajaxError(function() {
 function loadDemoContent(){
 	myOwl.data('owlCarousel').destroy();
 	myOwl.owlCarousel(demoOptions);
-
 	demoSlides.map(function(slide){
-		console.log(slide);
+		//console.log(slide);
 		slide.toggle();
 		myOwl.data('owlCarousel').addItem(slide);
 	});
@@ -273,8 +273,7 @@ function tourStep(e){
 
 		case 4:
 		myOwl.trigger('owl.next');
+		$("#steamID").val("");
 		break;
-
-
 	}
 }
