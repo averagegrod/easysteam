@@ -39,6 +39,7 @@ EasySteam.prototype.getOwnedGames = function(callback){
 		callback(that);
 	})
 	.fail(function() {
+		nanobar.go(100);
 		console.log("Error:" + data);
 	});
 };
@@ -59,6 +60,7 @@ EasySteam.prototype.getPlayerSummaries = function(callback){
 		callback(that);
 	})
 	.fail(function() {
+		nanobar.go(100);
 		console.log("Error:" + data);
 	});
 };
@@ -82,6 +84,7 @@ EasySteam.prototype.getPlayerAchievements = function(appID, callback){
 		that.getSchema(callback);
 	})
 	.fail(function() {
+		nanobar.go(100);
 		console.log("Error:" + data);
 	});
 };
@@ -97,6 +100,7 @@ EasySteam.prototype.getSchema = function(callback){
 		callback(that);
 	})
 	.fail(function() {
+		nanobar.go(100);
 		console.log("Error:" + data);
 	});
 };

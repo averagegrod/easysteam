@@ -8,9 +8,10 @@ var demoSlides = [$demoSlide0, $demoSlide1, $demoSlide2, $demoSlide3];
 
 
 var nanobarOptions = {
-	bg: '#acf',
-	id: 'mynano'
+	bg: '#2C96F2',
+	id: 'steamNano'
 };
+
 
 var nanobar = new Nanobar( nanobarOptions );
 
@@ -39,13 +40,14 @@ $(".prev").click(function(){
 });
 
 $('#steamForm')
-.on('invalid.fndtn.abide', function () {
+.on('invalid', function () {
 	//var invalid_fields = $(this).find('[data-invalid]');
 	//console.log(invalid_fields);
 
 	$("#steamForm small.error").show();
 })
-.on('valid.fndtn.abide', function () {
+.on('valid', function (e) {
+	e.preventDefault();
 	init();
 	$("#steamForm small.error").hide();
 });
@@ -53,6 +55,8 @@ $('#steamForm')
 function init(){
 	var steamID = $('#steamID').val();
 	var player = new EasySteam(steamID);
+
+	nanobar.go(20);
 	clear();
 	clearAchievements();
 
@@ -149,14 +153,14 @@ function loadSlides(){
 }
 
 function displayPlayerData(player){
-	
 	$('#avatar').append("<img src=\"" + player.avatar + "\">");
 	$('#avatar').append("<h1>" + player.personaname);
+	
 }
 
 function displayGameData(player){
 	var $gamesHeading = $("<h3>");
-
+	nanobar.go(45);
 	$('#stats').append("Total games:" + player.games.length + " games!<br />");
 	$('#stats').append("Total Played games:" + player.played.length + " games!<br />");
 	$('#stats').append("Total Unplayed games:" + player.unplayed.length + " games!<br />");
@@ -164,8 +168,8 @@ function displayGameData(player){
 	player.displayTime = calculatePlayTime(player.totalPlayTime);
 	$('#stats').append(player.displayTime.days + " days, " + player.displayTime.hours + " hours, " + player.displayTime.minutes + " minutes");
 	
-
-	player.played.forEach(function(game){
+	player.played.forEach(function(game, index){
+		
 		var source = "http://media.steampowered.com/steamcommunity/public/images/apps/" + game.appid + "/"+ game.img_logo_url + ".jpg";
 		var $game = $("<img>", {src:source, class:"game" });
 		$('#pizza').append("<li data-value=\"" + game.playtime_forever / player.totalPlayTime * 10 + "\">" + game.name + "</li>");
@@ -180,6 +184,7 @@ function displayGameData(player){
 				window.scrollTo(0,0);
 			});
 		}
+
 	});
 
 	player.recent.forEach(function(game){
@@ -198,6 +203,8 @@ function displayGameData(player){
 
 	$('#games').prepend($gamesHeading);
 	($gamesHeading).html("Played Games with Achievements");
+	nanobar.go(100);
+	
 }
 
 function displayAchievements(player){
@@ -221,12 +228,12 @@ function displayAchievements(player){
 	myOwl.data('owlCarousel').goTo(3);
 }
 
-
+/*
 Pizza.init();
 $("#holder").jPages({
 	containerID: "pizza",
 	perPage: 20
-});
+});*/
 
 
 $( document ).ajaxError(function() {
@@ -242,12 +249,12 @@ function loadDemoContent(){
 		slide.toggle();
 		myOwl.data('owlCarousel').addItem(slide);
 	});
-	
+	/*
 	Pizza.init();
 	$("#holder").jPages({
 		containerID: "pizza",
 		perPage: 20
-	});
+	});*/
 
 }
 
